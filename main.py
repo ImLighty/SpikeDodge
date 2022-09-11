@@ -1,3 +1,4 @@
+from audioop import mul
 import pygame
 import sys
 import random
@@ -27,6 +28,7 @@ black = 0, 0, 0
 
 async def main():
   score = 0
+  high_score = 0
 
 # Load assets
   ball = pygame.image.load("assets/ball.png")
@@ -69,6 +71,7 @@ async def main():
 
   enemies = []
   enemy_amount = 5
+  multiplier = 5
 
   pygame.mixer.music.load("assets/musicloop.wav")
   if sys.platform == "emscripten":
@@ -100,6 +103,8 @@ async def main():
     if menu:
         screen.fill(white)
         screen.blit(big_font.render("SpikeDodge", True, black), (230, 150))
+        high_score_text = font.render(f"High Score: {high_score}", True, black)
+        screen.blit(high_score_text, (400 - (high_score_text.get_width() / 2), 300))
         if play_button_rect.collidepoint(pygame.mouse.get_pos()):
             screen.blit(pygame.transform.scale(play_button, (225, 75)), (
                 400 - 112.5,
@@ -147,6 +152,7 @@ async def main():
             enemies.clear()
             score = 0
             enemy_amount = 5
+            multiplier = 5
             gameplay = False
             menu = True
 
@@ -159,16 +165,19 @@ async def main():
                 if ball_rect.y + 32 > enemy.y and ball_rect.y < enemy.y + 32:
                     death_sound.play()
                     enemies.clear()
+                    high_score = score
                     score = 0
                     enemy_amount = 5
-                    for i in range(enemy_amount):
-                        enemies.append(Enemy(random.randint(0, 800 - 64), -64))
+                    multiplier = 5
+                    gameplay = False
+                    menu = True
 
             if enemy.y > 480:
                 enemy.x = random.randint(0, 800 - 32)
                 enemy.y = -64
                 score += 1
-                if score % 5 == 0:
+                if score % multiplier == 0:
+                    multiplier = multiplier * 2
                     enemy_amount = enemy_amount + 1
                     enemies.append(Enemy(random.randint(0, 800 - 64), -64))
 
