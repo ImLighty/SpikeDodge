@@ -33,7 +33,6 @@ async def main():
 # Load assets
   ball = pygame.image.load("assets/ball.png")
   ball_rect = ball.get_rect()
-  ball_rect.x = 400 - (ball_rect.width / 2)
   ball_rect.y = 300
 
   spike = pygame.image.load("assets/spike.png")
@@ -112,6 +111,7 @@ async def main():
             ))
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 or event.type == pygame.FINGERDOWN:
                 menu = False
+                ball_rect.x = 400 - (ball_rect.width / 2)
                 for i in range(enemy_amount):
                     enemies.append(Enemy(random.randint(0, 800 - 64), -64))
                 gameplay = True
@@ -122,6 +122,10 @@ async def main():
     if gameplay:
         acceleration = 4
         keys = pygame.key.get_pressed()
+        if ball_rect.x <= 0:
+            ball_rect.x = 1
+        if ball_rect.x >= 800 - 64:
+            ball_rect.x = 799 - 64
         if keys[pygame.K_LSHIFT]:
             acceleration = 12
             touch = False
