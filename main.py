@@ -165,7 +165,8 @@ async def main():
                 if ball_rect.y + 32 > enemy.y and ball_rect.y < enemy.y + 32:
                     death_sound.play()
                     enemies.clear()
-                    high_score = score
+                    if score > high_score:
+                        high_score = score
                     score = 0
                     enemy_amount = 5
                     multiplier = 5
