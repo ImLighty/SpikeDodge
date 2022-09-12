@@ -4,19 +4,11 @@ import sys
 import random
 import asyncio
 
+from components.Player import Player
+from components.Enemy import Enemy
+
 # Initialize pygame
 pygame.init()
-
-class Enemy:
-    x = 0
-    y = 0,
-    speed = 0
-
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.speed = random.randint(5, 10)
-
 
 # Create a window
 size = width, height = 800, 480
@@ -31,9 +23,8 @@ async def main():
   high_score = 0
 
 # Load assets
-  ball = pygame.image.load("assets/ball.png")
-  ball_rect = ball.get_rect()
-  ball_rect.y = 300
+  ball = Player()
+  ball_rect = ball.rect
 
   spike = pygame.image.load("assets/spike.png")
 
@@ -188,7 +179,7 @@ async def main():
 
             screen.blit(spike, (enemy.x, enemy.y))
 
-        screen.blit(ball, ball_rect)
+        screen.blit(ball.image, ball_rect)
         water.get_rect().x = water.get_rect().x + 10
         screen.blit(water, (water.get_rect().x, 480 - 85))
 
