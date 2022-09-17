@@ -1,4 +1,3 @@
-from audioop import mul
 import pygame
 import sys
 import random
@@ -17,7 +16,6 @@ pygame.display.set_caption("SpikeDodge")
 white = 255, 255, 255
 black = 0, 0, 0
 
-
 async def main():
   score = 0
   high_score = 0
@@ -26,35 +24,35 @@ async def main():
   ball = Player()
   ball_rect = ball.rect
 
-  spike = pygame.image.load("assets/spike.png")
+  spike = pygame.image.load("assets/spike.png").convert_alpha()
 
-  water = pygame.image.load("assets/water.png")
+  water = pygame.image.load("assets/water.png").convert_alpha()
 
   font = pygame.font.Font("assets/JustMyType.ttf", 20)
   big_font = pygame.font.Font("assets/JustMyType.ttf", 100)
 
-  play_button = pygame.image.load("assets/playbutton.png")
+  play_button = pygame.image.load("assets/playbutton.png").convert_alpha()
   play_button_rect = play_button.get_rect()
   play_button_rect.x = 400 - 75
   play_button_rect.y = 400
 
-  left = pygame.image.load("assets/left.png")
+  left = pygame.image.load("assets/left.png").convert_alpha()
   left_rect = left.get_rect()
   left_rect.x = 130
   left_rect.y = 370
-  right = pygame.image.load("assets/right.png")
+  right = pygame.image.load("assets/right.png").convert_alpha()
   right_rect = right.get_rect()
   right_rect.x = 570
   right_rect.y = 370
-  left_accel = pygame.image.load("assets/leftaccel.png")
+  left_accel = pygame.image.load("assets/leftaccel.png").convert_alpha()
   left_accel_rect = left_accel.get_rect()
   left_accel_rect.x = 30
   left_accel_rect.y = 370
-  right_accel = pygame.image.load("assets/rightaccel.png")
+  right_accel = pygame.image.load("assets/rightaccel.png").convert_alpha()
   right_accel_rect = right_accel.get_rect()
   right_accel_rect.x = 670
   right_accel_rect.y = 370
-  exit_button = pygame.image.load("assets/exitbutton.png")
+  exit_button = pygame.image.load("assets/exitbutton.png").convert_alpha()
   exit_button_rect = exit_button.get_rect()
   exit_button_rect.x = 400 - 20
   exit_button_rect.y = 4
